@@ -1,54 +1,65 @@
+"""
+authors (Github handles): Paul Sharrat (psharratt), Amin Oueslati (amin-oueslati), Fabian Metz (Fabian-Metz), Oskar Krafft (OskarKrafft)
+"""
+
 class CaesarCipher:
     def __init__(self, shift):
         self.shift = shift % 26
         
     def encrypt(self, message):
-        
-        # Convert message to list of characters
+        """
+        Encrypts a message using the Caesar Cipher encryption algorithm.
+        """
         char_list = list(message)
         
-        # Encrypt each character by shifting it by self.shift
         for i in range(len(char_list)):
             if char_list[i].isalpha():
                 if char_list[i].isupper():
-                    char_list[i] = chr((ord(char_list[i]) - 65 + self.shift) % 26 + 65)
+                    char_list[i] = self.shift_character(char_list[i], 'A')
                 elif char_list[i].islower():
-                    char_list[i] = chr((ord(char_list[i]) - 95 + self.shift) % 26 + 95)
-            else:
-                char_list[i] = char_list[i]
+                    char_list[i] = self.shift_character(char_list[i], 'a')
         
-        # Convert list of characters back to string
-        encrypted_message = self.output(char_list)
-        
+        encrypted_message = self.list_to_string(char_list)
         return encrypted_message
         
     def decrypt(self, message):
-        
-        # Convert message to list of characters
+        """
+        Decrypts a message using the Caesar Cipher encryption algorithm.
+        """
         char_list = list(message)
         
-        # Decrypt each character by shifting it by -self.shift
         for i in range(len(char_list)):
             if char_list[i].isalpha():
                 if char_list[i].isupper():
-                    char_list[i] = chr((ord(char_list[i]) - 65 - self.shift) % 26 + 65)
+                    char_list[i] = self.shift_character(char_list[i], 'A', reverse=True)
                 elif char_list[i].islower():
-                    char_list[i] = chr((ord(char_list[i]) - 95 - self.shift) % 26 + 95)
-            else:
-                char_list[i] = char_list[i]
+                    char_list[i] = self.shift_character(char_list[i], 'a', reverse=True)
         
-        # Convert list of characters back to string
-        decrypted_message = self.output(char_list)
-        
+        decrypted_message = self.list_to_string(char_list)
         return decrypted_message
     
-    def output(self, char_list):
-        
-        # Convert list of characters back to string
+    def shift_character(self, char, base_char, reverse=False):
+        """
+        Shifts a single character by the specified amount, either forwards or backwards.
+        """
+        if reverse:
+            shift = -self.shift
+        else:
+            shift = self.shift
+            
+        char_code = ord(char) - ord(base_char)
+        shifted_code = (char_code + shift) % 26
+        shifted_char = chr(shifted_code + ord(base_char))
+        return shifted_char
+    
+    def list_to_string(self, char_list):
+        """
+        Converts a list of characters back to a string.
+        """
         return ''.join(char_list)
 
 
-# Test
+# Sample Test
 
 cipher = CaesarCipher(3)
 message = "THE EAGLE IS IN PLAY; MEET AT JOE'S"
