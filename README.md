@@ -1,3 +1,10 @@
+# Comment on our solutions
+
+We provide two solutions to the assignment. The "Basic CaeserCipher" assumes that the message only contains uppercase letters, whereas the "Advanced CaeserCipher" can handle lowercase, too.
+
+Further, the "Advanced CeaserCipher" assigns a random integer between 1 and 25 as a shift which makes the Cipher more secure. Since the shift value is different for each instance of the CaesarCipherAdvanced class, the encoding and decoding keys will also be different for each instance. This improves the security of the encryption, since a potential attacker cannot rely on the key being the same for each message. It also makes the encryption more versatile, since we can use it to encrypt a wider range of messages with different shift values.
+
+
 # CaesarCipher
 
 The Caesar cipher involves replacing each letter in a message with the letter that is a certain number of letters after it in the alphabet. So, in an English message, we might replace each A with D, each B with E, each C with F, and so on, if shifting by three characters. We continue this approach all the way up to W, which is replaced with Z. Then, we let the substitution pattern wrap around, so that we replace X with A, Y with B, and Z with C.
